@@ -21,7 +21,7 @@
 
 ### 1. Clone the repository
 ```bash
-git clone https://github.com/<your-username>/gocards.git
+git clone https://github.com/DavydAbbasov/Gocards
 cd gocards
 ```
 ### Architecture diagram
