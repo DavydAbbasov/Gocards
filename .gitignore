@@ -1,0 +1,10 @@
+.idea/
+**/.env
+**/docker-compose.override.yml
+**/vendor
+**/.vscode
+/bin/
+/*.exe
+*.log
+*.out
+*.test
