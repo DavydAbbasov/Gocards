@@ -1,8 +1,9 @@
-package repository
+package postgresql
 
 import (
 	"database/sql"
 	"fmt"
+	"gocarts/internal/repository"
 )
 
 func (d *DBrepo) GetUserPasswordHash(login string) (string, error) {
@@ -16,7 +17,7 @@ func (d *DBrepo) GetUserPasswordHash(login string) (string, error) {
 	err := d.db.QueryRow(q, login).Scan(&password_hash)
 	if err != nil {
 		if err == sql.ErrNoRows {
-			return "", ErrUserNotFound
+			return "", repository.ErrUserNotFound
 		}
 		return "", fmt.Errorf("db error %w:", err)
 	}
