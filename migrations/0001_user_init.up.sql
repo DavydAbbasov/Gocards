@@ -7,4 +7,4 @@ CREATE TABLE IF NOT EXIST users (
         TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE INDEXT IF NOT EXISTS idx_user_login ON users (login);
+CREATE INDEXT IF NOT EXISTS idx_users_login ON users (login);
