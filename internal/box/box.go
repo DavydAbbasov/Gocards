@@ -3,7 +3,6 @@ package box
 import (
 	"context"
 	"database/sql"
-	"errors"
 	"fmt"
 	"gocarts/internal/config"
 	redisrepo "gocarts/internal/repository/redis"
@@ -60,7 +59,7 @@ func New() (*Env, error) {
 }
 func initRedisClient(cfg config.RedisConfig) (*redis.Client, error) {
 	if cfg.Addr == "" {
-		return nil, errors.New("redis addr required")
+		return nil, RedisRequired
 	}
 	opt := &redis.Options{
 		Addr:        cfg.Addr,

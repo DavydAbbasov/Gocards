@@ -2,12 +2,12 @@ package postgresql
 
 import "database/sql"
 
-type DBrepo struct {
+type DBStorage struct {
 	db *sql.DB
 }
 
-func NewDB(db *sql.DB) *DBrepo {
-	return &DBrepo{
+func NewDB(db *sql.DB) *DBStorage {
+	return &DBStorage{
 		db: db,
 	}
 }

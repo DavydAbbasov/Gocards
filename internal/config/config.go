@@ -45,6 +45,10 @@ func Load() (*Config, error) {
 		return nil, fmt.Errorf("failed to read config from env: %w", err)
 	}
 
+	//time
+	if cfg.HTTPServer.Timeout == 0 {
+		cfg.HTTPServer.Timeout = 15 * time.Second
+	}
 	if cfg.Redis.DialTimeout == 0 {
 		cfg.Redis.DialTimeout = 5 * time.Second
 	}
