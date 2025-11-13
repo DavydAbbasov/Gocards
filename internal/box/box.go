@@ -17,7 +17,7 @@ type Env struct {
 	Config      *config.Config
 	RedisClient *redis.Client
 	RedisStore  *redisrepo.RedisStore
-	PostgreSql  *sql.DB
+	Postgres    *sql.DB
 }
 
 func New() (*Env, error) {
@@ -55,7 +55,7 @@ func New() (*Env, error) {
 		Config:      cfg,
 		RedisStore:  store,
 		RedisClient: rdb,
-		PostgreSql:  postgre,
+		Postgres:    postgre,
 	}, nil
 }
 func initRedisClient(cfg config.RedisConfig) (*redis.Client, error) {
@@ -93,8 +93,8 @@ func provideDB(dsn string) (*sql.DB, error) {
 }
 func (e *Env) Close() error {
 	var firstErr error
-	if e.PostgreSql != nil {
-		if err := e.PostgreSql.Close(); err != nil && firstErr == nil {
+	if e.Postgres != nil {
+		if err := e.Postgres.Close(); err != nil && firstErr == nil {
 			firstErr = err
 		}
 	}

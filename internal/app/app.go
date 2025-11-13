@@ -14,7 +14,7 @@ func Run() error {
 
 	//logger
 
-	postgre := postgresql.NewDB(envBox.PostgreSql)
+	postgre := postgresql.NewDB(envBox.Postgres)
 
 	//service
 	_ = postgre
