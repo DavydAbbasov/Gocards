@@ -1,0 +1,10 @@
+CREATE TABLE IF NOT EXIST users (
+    id SERIAL PRIMARY KEY,
+    login VARCHAR(100) UNIQUE NOT NULL,
+    password_hash TEXT NOT NULL,
+    create_at TIMESTAMP
+    WITH
+        TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEXT IF NOT EXISTS idx_user_login ON users (login);
