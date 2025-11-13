@@ -10,6 +10,7 @@ func Run() error {
 	if err != nil {
 		return err
 	}
+	defer envBox.Close()
 
 	//logger
 

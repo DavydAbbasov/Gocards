@@ -98,8 +98,8 @@ func (e *Env) Close() error {
 			firstErr = err
 		}
 	}
-	if e.RedisClient != nil {
-		if err := e.RedisClient.Close(); err != nil && firstErr == nil {
+	if e.RedisStore != nil {
+		if err := e.RedisStore.Close(); err != nil && firstErr == nil {
 			firstErr = err
 		}
 	}

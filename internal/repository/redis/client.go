@@ -7,7 +7,7 @@ import (
 )
 
 type RedisStore struct {
-	cli *redis.Client
+	client *redis.Client
 }
 
 func NewRedisStore(cli *redis.Client) (*RedisStore, error) {
@@ -15,6 +15,12 @@ func NewRedisStore(cli *redis.Client) (*RedisStore, error) {
 		return nil, repository.RedisRequired
 	}
 	return &RedisStore{
-		cli: cli,
+		client: cli,
 	}, nil
+}
+func (r *RedisStore) Close() error {
+	if r == nil || r.client == nil {
+		return nil
+	}
+	return r.client.Close()
 }
