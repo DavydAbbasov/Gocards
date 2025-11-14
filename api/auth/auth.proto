@@ -1,0 +1,79 @@
+syntax = "proto3";
+
+package auth;
+
+option go_package = "github.com/DavydAbbasov/Gocards/api/auth;auth";
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+
+message LoginRequest {
+  int64 id = 1;
+  string login = 2;
+  string email = 3;
+  string password = 4;
+  bool active = 5;
+  google.protobuf.Timestamp created_at = 6;
+  google.protobuf.Timestamp updated_at = 7;
+}
+
+message TokenPair {
+  string access_token = 1;
+  string refresh_token = 2;
+  int64 access_expires_at_unix = 3;
+  int64 refresh_expires_at_unix = 4;
+}
+
+message RefreshRequest {
+  string refresh_token = 1;
+  string user_agent = 2;
+  string ip = 3;
+}
+
+message LogoutRequest {
+  string access_token = 1;
+  string refresh_token = 2;
+}
+
+message IntrospectRequest {
+  string access_token = 1;
+}
+
+message IntrospectResponse {
+  bool active = 1;
+  int64 user_id = 2;
+  string login = 3;
+  string email = 4;
+  int64 exp_unix = 5;
+}
+
+service AuthService {
+  rpc Login(LoginRequest) returns (TokenPair) {
+    option (google.api.http) = {
+      post: "/auth/login"
+      body: "*"
+    };
+  }
+
+  rpc Refresh(RefreshRequest) returns (TokenPair) {
+    option (google.api.http) = {
+      post: "/auth/refresh"
+      body: "*"
+    };
+  }
+
+  rpc Logout(LoginRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      post: "/auth/logout"
+      body: "*"
+    };
+  }
+
+  rpc Introspect(IntrospectRequest) returns (IntrospectResponse) {
+    option (google.api.http) = {
+      post: "/auth/introspect"
+      body: "*"
+    };
+  }
+}
